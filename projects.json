@@ -41,7 +41,7 @@
     },
     {
         "id":  99999004,
-        "title":  "Ori & Naru",
+        "title":  "Ori \u0026 Naru",
         "category":  "Portraits",
         "permalink":  "",
         "file":  "Ori.png",
@@ -167,7 +167,8 @@
         "category":  "Portraits",
         "permalink":  "https://www.artstation.com/artwork/lDA2ao",
         "file":  "012-les-yeux-d-izaid.jpg",
-        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/076/937/445/20240612030651/smaller_square/doudream-yx-d-izaid.jpg?1718179611"
+        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/076/937/445/20240612030651/smaller_square/doudream-yx-d-izaid.jpg?1718179611",
+        "size":  "large"
     },
     {
         "id":  18399621,
@@ -458,7 +459,8 @@
         "category":  "Portraits",
         "permalink":  "https://www.artstation.com/artwork/xJG1ZW",
         "file":  "048-portrait.jpg",
-        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/238/637/large/sabrina-doudream-mat.jpg?1628257134"
+        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/238/637/large/sabrina-doudream-mat.jpg?1628257134",
+        "size":  "large"
     },
     {
         "id":  10638427,
@@ -508,7 +510,8 @@
         "category":  "Portraits",
         "permalink":  "https://www.artstation.com/artwork/nYmrde",
         "file":  "054-portrait.jpg",
-        "hd_url":  "https://cdna.artstation.com/p/assets/images/images/040/237/876/large/sabrina-doudream-portrait.jpg?1628255496"
+        "hd_url":  "https://cdna.artstation.com/p/assets/images/images/040/237/876/large/sabrina-doudream-portrait.jpg?1628255496",
+        "size":  "large"
     },
     {
         "id":  10638057,
@@ -588,7 +591,8 @@
         "category":  "Portraits",
         "permalink":  "https://www.artstation.com/artwork/WKOR8Q",
         "file":  "064-portrait.jpg",
-        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/238/999/large/sabrina-doudream-ilian.jpg?1628257895"
+        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/238/999/large/sabrina-doudream-ilian.jpg?1628257895",
+        "size":  "small"
     },
     {
         "id":  10638272,
@@ -716,7 +720,8 @@
         "category":  "Portraits",
         "permalink":  "https://www.artstation.com/artwork/B1dZe6",
         "file":  "081-portrait.jpg",
-        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/239/531/large/sabrina-doudream-akuma.jpg?1628259246"
+        "hd_url":  "https://cdnb.artstation.com/p/assets/images/images/040/239/531/large/sabrina-doudream-akuma.jpg?1628259246",
+        "size":  "small"
     },
     {
         "id":  10638146,

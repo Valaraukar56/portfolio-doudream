@@ -283,7 +283,7 @@ body {
   overflow: hidden;
   border-radius: 8px;
   cursor: pointer;
-  background: var(--surface);
+  background: transparent;
   transition: transform 0.4s var(--transition), box-shadow 0.4s var(--transition);
 }
 
