@@ -289,18 +289,18 @@ body {
 
 .art:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 
 .art img {
   display: block;
   width: 100%;
   height: auto;
+  border-radius: 8px;
   transition: transform 0.6s var(--transition), filter var(--transition);
-  background: var(--surface);
+  background: transparent;
 }
 
-.art:hover img { transform: scale(1.03); filter: brightness(1.05); }
+.art:hover img { filter: brightness(1.05); }
 
 .art__overlay {
   position: absolute;
