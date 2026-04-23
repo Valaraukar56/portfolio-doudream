@@ -163,14 +163,28 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') navigate(1);
 });
 
-// Form
-document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+// Form (Formsubmit AJAX)
+document.getElementById('contact-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = e.target.querySelector('button[type="submit"]');
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
   const original = btn.textContent;
-  btn.textContent = '✓ Message envoyé';
+  btn.textContent = 'Envoi…';
   btn.disabled = true;
-  setTimeout(() => { btn.textContent = original; btn.disabled = false; e.target.reset(); }, 3000);
+  try {
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+    if (!res.ok) throw new Error('network');
+    btn.textContent = '✓ Message envoyé';
+    form.reset();
+  } catch (err) {
+    btn.textContent = '✗ Erreur, réessayez';
+  } finally {
+    setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 3000);
+  }
 });
 
 init();
