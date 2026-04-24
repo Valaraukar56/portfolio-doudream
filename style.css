@@ -572,6 +572,46 @@ body {
   line-height: 1.55;
 }
 
+.nav__ig {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  color: var(--ink-2);
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.nav__ig::after { display: none; }
+.nav__ig:hover {
+  color: var(--accent);
+  border-color: rgba(229,184,122,0.35);
+  transform: translateY(-1px);
+}
+
+.footer__ig {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1.1rem;
+  margin: 0.25rem 0 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  transition: color var(--transition), border-color var(--transition), background var(--transition), transform var(--transition);
+}
+.footer__ig:hover {
+  color: var(--accent);
+  border-color: rgba(229,184,122,0.35);
+  background: rgba(229,184,122,0.04);
+  transform: translateY(-1px);
+}
+.footer__ig svg { flex-shrink: 0; }
+
 /* ===== LIGHTBOX ===== */
 .lightbox {
   position: fixed;
