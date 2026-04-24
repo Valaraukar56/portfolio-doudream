@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Politique de confidentialité — DouDream</title>
+    <meta name="description" content="Politique de confidentialité du portfolio DouDream — gestion des données du formulaire de contact." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/jpeg" href="assets/images/avatar.jpg" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav">
+      <a href="index.html" class="nav__logo"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</a>
+      <ul class="nav__links">
+        <li><a href="index.html#portfolio">Portfolio</a></li>
+        <li><a href="index.html#apropos">À propos</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <button class="nav__burger" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+    </nav>
+
+    <!-- LEGAL -->
+    <section class="legal">
+      <div class="legal__inner">
+        <p class="eyebrow">Vie privée</p>
+        <h1 class="h-title">
+          Politique de
+          <br />
+          <em>confidentialité</em>
+          .
+        </h1>
+
+        <p class="legal__intro">
+          Cette page décrit comment sont traitées les données que vous me
+          transmettez via le formulaire de contact du site.
+        </p>
+
+        <h2>Qui collecte les données ?</h2>
+        <p>
+          DouDream, artiste peintre numérique, exerçant à titre individuel.
+          Pour toute question, vous pouvez me joindre à l'adresse
+          <a href="mailto:DouDreamCreation@outlook.fr" class="contact__email-link">DouDreamCreation@outlook.fr</a>.
+        </p>
+
+        <h2>Quelles données sont collectées ?</h2>
+        <p>
+          Uniquement les informations que vous saisissez volontairement dans
+          le formulaire : votre nom, votre adresse email, le type de projet
+          et le contenu de votre message. Aucune donnée n'est collectée à
+          votre insu, aucun cookie de tracking n'est utilisé sur ce site.
+        </p>
+
+        <h2>À quoi servent-elles ?</h2>
+        <p>
+          Ces informations servent exclusivement à vous répondre et à
+          échanger autour de votre demande (commande, collaboration, question).
+          Elles ne sont ni partagées à des tiers, ni utilisées à des fins
+          commerciales, ni intégrées à une liste de diffusion.
+        </p>
+
+        <h2>Par où transitent-elles ?</h2>
+        <p>
+          Le formulaire est transmis via
+          <a href="https://formsubmit.co" target="_blank" rel="noopener">Formsubmit</a>,
+          service qui relaie le message vers ma boîte mail Outlook
+          (Microsoft). Ces deux prestataires disposent de leurs propres
+          politiques de confidentialité conformes au RGPD.
+        </p>
+
+        <h2>Combien de temps sont-elles conservées ?</h2>
+        <p>
+          Le temps nécessaire à l'échange en cours. Une fois la conversation
+          terminée, le message peut rester dans ma boîte mail par archivage,
+          sauf demande explicite de votre part.
+        </p>
+
+        <h2>Vos droits</h2>
+        <p>
+          Conformément au RGPD, vous pouvez à tout moment demander l'accès,
+          la rectification ou la suppression de vos données en
+          m'écrivant à
+          <a href="mailto:DouDreamCreation@outlook.fr" class="contact__email-link">DouDreamCreation@outlook.fr</a>.
+          La demande sera traitée dans les meilleurs délais.
+        </p>
+
+        <h2>Hébergement</h2>
+        <p>
+          Ce site est hébergé par GitHub Pages (GitHub, Inc. — 88 Colin P
+          Kelly Jr St, San Francisco, CA 94107, USA).
+        </p>
+
+        <p class="legal__date">Dernière mise à jour : avril 2026.</p>
+
+        <p class="legal__back">
+          <a href="index.html" class="contact__email-link">← Retour au portfolio</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <p class="footer__brand"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</p>
+        <p class="footer__copy">© 2026 DouDream — Tous droits réservés</p>
+        <p class="footer__note">
+          Reproductions, utilisations commerciales ou redistribution interdites sans
+          autorisation écrite de l'artiste.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Burger menu (same behavior as main)
+      const nav = document.querySelector('.nav');
+      const burger = document.querySelector('.nav__burger');
+      burger?.addEventListener('click', () => {
+        nav.classList.toggle('nav--open');
+        burger.classList.toggle('nav__burger--active');
+      });
+      window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 40);
+      }, { passive: true });
+    </script>
+  </body>
+</html>
