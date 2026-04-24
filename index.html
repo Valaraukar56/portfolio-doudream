@@ -10,10 +10,19 @@
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts loaded async (non render-blocking) -->
     <link
+      rel="preload"
+      as="style"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
-      rel="stylesheet"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" href="style.css" />
     <link rel="preload" as="image" href="assets/images/avatar.webp" fetchpriority="high" />
     <link rel="icon" type="image/webp" href="assets/images/avatar.webp" />
@@ -1350,6 +1359,6 @@
   }
 ]
     </script>
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
   </body>
 </html>

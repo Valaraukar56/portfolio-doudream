@@ -59,16 +59,35 @@ function updateCounts() {
 const ROW_HEIGHT = 8;
 const GAP = 16;
 
+// Batched version — read ONE width (all grid columns are equal), then write all
+// spans. Avoids 129 forced reflows per render (layout thrashing killer).
+function setAllRowSpans() {
+  const arts = document.querySelectorAll('.art');
+  if (!arts.length) return;
+  // Single read pass — one layout flush for the whole batch
+  const colWidth = arts[0].getBoundingClientRect().width;
+  if (!colWidth) return;
+  // Single write pass — no reads interleaved
+  arts.forEach(art => {
+    const img = art.querySelector('img');
+    const aspect = parseFloat(art.dataset.aspect);
+    let ratio = aspect;
+    if (!ratio && img && img.naturalWidth) ratio = img.naturalHeight / img.naturalWidth;
+    if (!ratio) return;
+    const height = colWidth * ratio;
+    const span = Math.ceil((height + GAP) / (ROW_HEIGHT + GAP));
+    art.style.gridRow = `span ${span}`;
+  });
+}
+
 function setRowSpan(art) {
+  // Single-card version used on image onload fallback (when aspect was unknown)
   const img = art.querySelector('img');
-  // Prefer the known aspect ratio (from data-attrs) — avoids waiting for image load
-  // and prevents reflows after each image finishes decoding.
+  if (!img || !img.naturalWidth) return;
   const aspect = parseFloat(art.dataset.aspect);
+  let ratio = aspect || (img.naturalHeight / img.naturalWidth);
   const width = art.getBoundingClientRect().width;
-  if (!width) return;
-  let ratio = aspect;
-  if (!ratio && img && img.naturalWidth) ratio = img.naturalHeight / img.naturalWidth;
-  if (!ratio) return;
+  if (!width || !ratio) return;
   const height = width * ratio;
   const span = Math.ceil((height + GAP) / (ROW_HEIGHT + GAP));
   art.style.gridRow = `span ${span}`;
@@ -104,18 +123,14 @@ function renderGrid(cat) {
     const img = art.querySelector('img');
     img.addEventListener('load', () => setRowSpan(art));
   });
-  requestAnimationFrame(() => {
-    document.querySelectorAll('.art').forEach(setRowSpan);
-  });
+  requestAnimationFrame(setAllRowSpans);
 }
 
 let resizeTimer;
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(() => {
-    document.querySelectorAll('.art').forEach(setRowSpan);
-  }, 150);
-});
+  resizeTimer = setTimeout(setAllRowSpans, 150);
+}, { passive: true });
 
 function prettyCat(c) {
   return {
