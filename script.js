@@ -59,11 +59,11 @@ function updateCounts() {
 const ROW_HEIGHT = 8;
 const GAP = 16;
 
-// Re-layout on resize. One grid width read, then pure writes — no thrashing.
+// Re-layout on resize. Viewport math only — zero DOM reads.
 function setAllRowSpans() {
   const grid = document.getElementById('grid');
   if (!grid) return;
-  const gridW = grid.clientWidth;
+  const gridW = estimateGridWidth();
   if (!gridW) return;
   const arts = grid.children;
   for (let i = 0; i < arts.length; i++) {
@@ -109,13 +109,20 @@ function gridSpec(size) {
   return { totalCols, cardSpan: spans[size] || spans.normal };
 }
 
+// Grid width = viewport − .portfolio padding (4vw each side, capped at max-width 1600)
+// Derived from viewport only — no DOM read, no forced reflow.
+function estimateGridWidth() {
+  const vw = window.innerWidth;
+  const padding = Math.round(vw * 0.04) * 2; // 4vw × 2 sides
+  return Math.min(vw - padding, 1600 - padding);
+}
+
 function renderGrid(cat) {
   const grid = document.getElementById('grid');
-  grid.innerHTML = '';
   currentList = cat === 'all' ? allProjects : allProjects.filter(p => p.category === cat);
 
-  // Read grid width ONCE, outside the loop — no per-card layout thrashing.
-  const gridW = grid.clientWidth;
+  // Pure viewport math — no DOM geometry reads = no forced reflow.
+  const gridW = estimateGridWidth();
   const frag = document.createDocumentFragment();
 
   currentList.forEach((p, i) => {
@@ -160,7 +167,7 @@ function renderGrid(cat) {
   });
 
   // Single DOM insertion — one layout pass for the whole grid.
-  grid.appendChild(frag);
+  grid.replaceChildren(frag);
 }
 
 let resizeTimer;
