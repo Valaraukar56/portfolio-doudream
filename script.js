@@ -59,25 +59,29 @@ function updateCounts() {
 const ROW_HEIGHT = 8;
 const GAP = 16;
 
-// Batched version — read ONE width (all grid columns are equal), then write all
-// spans. Avoids 129 forced reflows per render (layout thrashing killer).
+// Re-layout on resize. One grid width read, then pure writes — no thrashing.
 function setAllRowSpans() {
-  const arts = document.querySelectorAll('.art');
-  if (!arts.length) return;
-  // Single read pass — one layout flush for the whole batch
-  const colWidth = arts[0].getBoundingClientRect().width;
-  if (!colWidth) return;
-  // Single write pass — no reads interleaved
-  arts.forEach(art => {
+  const grid = document.getElementById('grid');
+  if (!grid) return;
+  const gridW = grid.clientWidth;
+  if (!gridW) return;
+  const arts = grid.children;
+  for (let i = 0; i < arts.length; i++) {
+    const art = arts[i];
     const img = art.querySelector('img');
     const aspect = parseFloat(art.dataset.aspect);
     let ratio = aspect;
     if (!ratio && img && img.naturalWidth) ratio = img.naturalHeight / img.naturalWidth;
-    if (!ratio) return;
-    const height = colWidth * ratio;
+    if (!ratio) continue;
+    const size = art.classList.contains('art--small') ? 'small'
+               : art.classList.contains('art--large') ? 'large' : 'normal';
+    const { totalCols, cardSpan } = gridSpec(size);
+    const colW = (gridW - (totalCols - 1) * GAP) / totalCols;
+    const cardW = cardSpan * colW + (cardSpan - 1) * GAP;
+    const height = cardW * ratio;
     const span = Math.ceil((height + GAP) / (ROW_HEIGHT + GAP));
     art.style.gridRow = `span ${span}`;
-  });
+  }
 }
 
 function setRowSpan(art) {
@@ -93,18 +97,47 @@ function setRowSpan(art) {
   art.style.gridRow = `span ${span}`;
 }
 
+// Grid layout mirror of the CSS — returns { totalCols, cardSpan } for this viewport.
+// Matches style.css media queries: default 12, ≤1200 → 6, ≤900 → 4, ≤640 → 6 (narrower).
+function gridSpec(size) {
+  const vw = window.innerWidth;
+  let totalCols, spans;
+  if (vw <= 640) { totalCols = 6; spans = { small: 3, normal: 3, large: 5 }; }
+  else if (vw <= 900)  { totalCols = 4; spans = { small: 2, normal: 2, large: 3 }; }
+  else if (vw <= 1200) { totalCols = 6; spans = { small: 2, normal: 3, large: 6 }; }
+  else                 { totalCols = 12; spans = { small: 2, normal: 3, large: 6 }; }
+  return { totalCols, cardSpan: spans[size] || spans.normal };
+}
+
 function renderGrid(cat) {
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
   currentList = cat === 'all' ? allProjects : allProjects.filter(p => p.category === cat);
-  const DEFAULT_SPANS = { small: 20, normal: 35, large: 55 };
+
+  // Read grid width ONCE, outside the loop — no per-card layout thrashing.
+  const gridW = grid.clientWidth;
+  const frag = document.createDocumentFragment();
+
   currentList.forEach((p, i) => {
     const art = document.createElement('div');
     const size = p.size || 'normal';
     art.className = `art art--${size}`;
     art.dataset.idx = i;
-    if (p.w && p.h) art.dataset.aspect = (p.h / p.w).toFixed(4);
-    art.style.gridRow = `span ${DEFAULT_SPANS[size]}`;
+
+    // Compute grid-row span up front — no image load wait, no rect read per card.
+    let span;
+    if (p.w && p.h && gridW) {
+      art.dataset.aspect = (p.h / p.w).toFixed(4);
+      const { totalCols, cardSpan } = gridSpec(size);
+      const colW = (gridW - (totalCols - 1) * GAP) / totalCols;
+      const cardW = cardSpan * colW + (cardSpan - 1) * GAP;
+      const height = cardW * (p.h / p.w);
+      span = Math.ceil((height + GAP) / (ROW_HEIGHT + GAP));
+    } else {
+      span = ({ small: 20, normal: 35, large: 55 })[size];
+    }
+    art.style.gridRow = `span ${span}`;
+
     const base = p.file.replace(/\.webp$/, '');
     const small = `assets/images/${base}-800.webp`;
     const large = `assets/images/${p.file}`;
@@ -119,11 +152,15 @@ function renderGrid(cat) {
       </div>
     `;
     art.addEventListener('click', () => openLightbox(i));
-    grid.appendChild(art);
-    const img = art.querySelector('img');
-    img.addEventListener('load', () => setRowSpan(art));
+    // Safety fallback: if we didn't get dimensions, wait for image to load.
+    if (!(p.w && p.h)) {
+      art.querySelector('img').addEventListener('load', () => setRowSpan(art));
+    }
+    frag.appendChild(art);
   });
-  requestAnimationFrame(setAllRowSpans);
+
+  // Single DOM insertion — one layout pass for the whole grid.
+  grid.appendChild(frag);
 }
 
 let resizeTimer;
