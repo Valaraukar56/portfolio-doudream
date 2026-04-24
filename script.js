@@ -23,8 +23,14 @@ let currentList = [];
 let currentIdx = 0;
 
 async function init() {
-  const res = await fetch('projects.json');
-  allProjects = await res.json();
+  // Prefer inline JSON (no network round-trip), fallback to fetch
+  const inline = document.getElementById('projects-data');
+  if (inline) {
+    allProjects = JSON.parse(inline.textContent);
+  } else {
+    const res = await fetch('projects.json');
+    allProjects = await res.json();
+  }
   applyAutoSizing();
   updateCounts();
   renderGrid('all');
@@ -55,10 +61,15 @@ const GAP = 16;
 
 function setRowSpan(art) {
   const img = art.querySelector('img');
-  if (!img || !img.naturalWidth) return;
+  // Prefer the known aspect ratio (from data-attrs) — avoids waiting for image load
+  // and prevents reflows after each image finishes decoding.
+  const aspect = parseFloat(art.dataset.aspect);
   const width = art.getBoundingClientRect().width;
   if (!width) return;
-  const height = width * (img.naturalHeight / img.naturalWidth);
+  let ratio = aspect;
+  if (!ratio && img && img.naturalWidth) ratio = img.naturalHeight / img.naturalWidth;
+  if (!ratio) return;
+  const height = width * ratio;
   const span = Math.ceil((height + GAP) / (ROW_HEIGHT + GAP));
   art.style.gridRow = `span ${span}`;
 }
@@ -73,9 +84,14 @@ function renderGrid(cat) {
     const size = p.size || 'normal';
     art.className = `art art--${size}`;
     art.dataset.idx = i;
+    if (p.w && p.h) art.dataset.aspect = (p.h / p.w).toFixed(4);
     art.style.gridRow = `span ${DEFAULT_SPANS[size]}`;
+    const base = p.file.replace(/\.webp$/, '');
+    const small = `assets/images/${base}-800.webp`;
+    const large = `assets/images/${p.file}`;
+    const dims = (p.w && p.h) ? ` width="${p.w}" height="${p.h}"` : '';
     art.innerHTML = `
-      <img src="assets/images/${p.file}" alt="${escapeHtml(p.title)}" loading="lazy" />
+      <img src="${small}" srcset="${small} 800w, ${large} 1600w" sizes="(max-width:600px) 50vw, (max-width:1100px) 33vw, 25vw" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async"${dims} />
       <div class="art__overlay">
         <div class="art__info">
           <strong>${escapeHtml(p.title || 'Sans titre')}</strong>
@@ -139,6 +155,12 @@ function openLightbox(i) {
   lbCat.textContent = prettyCat(p.category);
   lightbox.classList.add('active');
   document.body.style.overflow = 'hidden';
+
+  // Preload both neighbours for instant nav
+  [-1, 1].forEach(d => {
+    const nb = currentList[(i + d + currentList.length) % currentList.length];
+    if (nb) { const img = new Image(); img.src = 'assets/images/' + nb.file; }
+  });
 }
 
 function closeLightbox() {

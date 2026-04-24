@@ -1,0 +1,4 @@
+_originals_backup/
+node_modules/
+package.json
+package-lock.json
