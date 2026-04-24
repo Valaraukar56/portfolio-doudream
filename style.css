@@ -73,7 +73,7 @@ body {
   font-size: 64px; font-weight: 400; letter-spacing: -0.04em;
   animation: loaderReveal 1.1s var(--ease-out) 0.2s both;
 }
-#loader .loader-logo em { font-style: italic; color: var(--accent); }
+#loader .loader-logo em { font-style: normal; color: var(--accent); }
 #loader .loader-line {
   width: 0; height: 1px; background: var(--accent); margin-top: 16px; opacity: 0.6;
   animation: loaderLine 1.0s var(--ease-out) 0.8s both;
@@ -144,7 +144,7 @@ body {
   font-family: var(--font-display); font-size: 1.5rem; font-weight: 500;
   color: var(--ink); text-decoration: none; letter-spacing: 0.01em;
 }
-.nav__logo em { font-style: italic; color: var(--accent); font-weight: 400; }
+.nav__logo em { font-style: normal; color: var(--accent); font-weight: 400; }
 .nav__links { display: flex; gap: 2.5rem; list-style: none; }
 .nav__links a {
   font-size: 0.88rem; font-weight: 500; color: var(--ink-2);
@@ -189,11 +189,8 @@ body {
   mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 55%, transparent 100%);
 }
-.hero::after {
-  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 220px;
-  pointer-events: none; z-index: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg) 100%);
-}
+/* hero::after supprimé — hero et portfolio partagent --bg, le fondu causait
+   du banding via le grain overlay (mix-blend-mode: overlay sur pixels semi-transparents) */
 .hero__content { position: relative; text-align: center; max-width: 700px; }
 
 .hero__avatar {
@@ -218,7 +215,7 @@ body {
   font-size: clamp(4rem, 12vw, 9rem); line-height: 0.9;
   letter-spacing: -0.03em; margin-bottom: 1.5rem;
 }
-.hero__title em { font-style: italic; color: var(--accent); font-weight: 400; }
+.hero__title em { font-style: normal; color: var(--accent); font-weight: 400; }
 .hero__title .char {
   display: inline-block;
   opacity: 0;
@@ -509,7 +506,7 @@ body {
 /* ── Footer ───────────────────────────────────────────────────────────────── */
 .footer { padding: 4rem 4vw 3rem; background: var(--bg); border-top: 1px solid var(--line); text-align: center; }
 .footer__brand { font-family: var(--font-display); font-size: 1.75rem; color: var(--ink); margin-bottom: 1rem; letter-spacing: 0.02em; }
-.footer__brand em { font-style: italic; color: var(--accent); font-weight: 400; }
+.footer__brand em { font-style: normal; color: var(--accent); font-weight: 400; }
 .footer__copy { font-size: 0.88rem; color: var(--ink-2); margin-bottom: 0.75rem; }
 .footer__note { font-size: 0.78rem; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.55; }
 
