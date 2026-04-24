@@ -1,277 +1,46 @@
 <!doctype html>
 <html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>DouDream — Artiste peintre numérique</title>
-    <meta
-      name="description"
-      content="Portfolio de DouDream, artiste peintre numérique. Portraits, paysages et créations originales."
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Fonts loaded async (non render-blocking) -->
-    <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"
-      />
-    </noscript>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preload" as="image" href="assets/images/avatar.webp" fetchpriority="high" />
-    <link rel="icon" type="image/webp" href="assets/images/avatar.webp" />
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav class="nav">
-      <a href="#" class="nav__logo"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</a>
-      <ul class="nav__links">
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#apropos">À propos</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li>
-          <a href="https://www.instagram.com/doudreamcreation/" target="_blank" rel="noopener" class="nav__ig" aria-label="Instagram">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad-nav)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <defs>
-                <linearGradient id="ig-grad-nav" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                  <stop offset="0" stop-color="#f09433" />
-                  <stop offset="0.25" stop-color="#e6683c" />
-                  <stop offset="0.5" stop-color="#dc2743" />
-                  <stop offset="0.75" stop-color="#cc2366" />
-                  <stop offset="1" stop-color="#bc1888" />
-                </linearGradient>
-              </defs>
-              <rect x="3" y="3" width="18" height="18" rx="5" />
-              <circle cx="12" cy="12" r="4" />
-              <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad-nav)" stroke="none" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-      <button class="nav__burger" aria-label="Menu">
-        <span></span>
-        <span></span>
-      </button>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DouDream — Artiste peintre numérique</title>
+  <meta name="description" content="Portfolio de DouDream, artiste peintre numérique. Portraits, paysages et créations originales." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Fonts loaded async (non render-blocking) -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" /></noscript>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preload" as="image" href="assets/images/avatar.webp" fetchpriority="high" />
+  <link rel="icon" type="image/webp" href="assets/images/avatar.webp" />
+</head>
+<body>
 
-    <!-- HERO -->
-    <header class="hero">
-      <div class="hero__content">
-        <img src="assets/images/avatar.webp" alt="DouDream" class="hero__avatar" width="120" height="120" fetchpriority="high" />
-        <p class="hero__eyebrow">Artiste peintre numérique</p>
-        <h1 class="hero__title" aria-label="DouDream"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</h1>
-        <p class="hero__tagline">
-          Portraits, paysages, créations originales.
-          <br />
-          Chaque oeuvre est un monde sur mesure.
-        </p>
-        <div class="hero__stats">
-          <div>
-            <strong id="stat-total">129</strong>
-            <span>œuvres</span>
-          </div>
-          <div>
-            <strong>5</strong>
-            <span>univers</span>
-          </div>
-          <div>
-            <strong>2018 →</strong>
-            <span>en cours</span>
-          </div>
-        </div>
-        <a href="#portfolio" class="hero__cta">
-          Découvrir le portfolio
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path d="M12 5v14M19 12l-7 7-7-7" />
-          </svg>
-        </a>
-      </div>
-    </header>
+  <!-- Film grain overlay -->
+  <div id="grain" aria-hidden="true"></div>
 
-    <!-- PORTFOLIO -->
-    <section class="portfolio" id="portfolio">
-      <div class="portfolio__header">
-        <p class="eyebrow">Le portfolio</p>
-        <h2 class="h-title">
-          Une
-          <em>Histoire</em>
-          ,
-          <br />
-          Un coup de
-          <em>pinceau</em>
-          .
-        </h2>
-      </div>
+  <!-- Scroll progress -->
+  <div id="scroll-progress"></div>
 
-      <div class="filters" id="filters">
-        <button class="filter filter--active" data-cat="all">
-          Tout
-          <span id="count-all"></span>
-        </button>
-        <button class="filter" data-cat="Portraits">
-          Portraits
-          <span id="count-Portraits"></span>
-        </button>
-        <button class="filter" data-cat="Paysages">
-          Paysages
-          <span id="count-Paysages"></span>
-        </button>
-        <button class="filter" data-cat="CreationPaysages">
-          Créations paysages
-          <span id="count-CreationPaysages"></span>
-        </button>
-        <button class="filter" data-cat="Divers">
-          Créations
-          <span id="count-Divers"></span>
-        </button>
-      </div>
+  <!-- Loader -->
+  <div id="loader" aria-hidden="true">
+    <div class="loader-logo"><em>D</em>ou<em>D</em>ream</div>
+    <div class="loader-line"></div>
+    <div class="loader-sub">Artiste peintre numérique</div>
+  </div>
 
-      <div class="grid" id="grid">
-        <!-- JS will inject -->
-      </div>
-    </section>
-
-    <!-- À PROPOS -->
-    <section class="about" id="apropos">
-      <div class="about__inner">
-        <div class="about__left">
-          <p class="eyebrow">À propos</p>
-          <h2 class="h-title">
-            Une passion,
-            <br />
-            <em>Des créations</em>.
-          </h2>
-        </div>
-        <div class="about__right">
-          <p>
-            Je peins en numérique depuis 2019. Portraits, paysages, fan-arts, 
-            en reproduction ou en imaginaire. Chaque œuvre est une exploration, 
-            une atmosphère, un moment suspendu.
-          </p>
-          <p>
-            Mon travail s'articule autour de la lumière, du détail, 
-            et de l'émotion qu'une illustration peut apporter. 
-            Je peins ce que je ressens autant que ce que je vois.
-          </p>
-          <p>
-            Ce que vous voyez ici n'est pas à vendre, 
-            cela vous donne une idée concrète de ce que je peux vous offrir. 
-            Avec une personnalisation à volonté. 
-          </p>
-          <p>
-            N'hésitez pas à me contacter via le 
-            formulaire ci-dessous pour toute commande ou collaborations.
-          </p>
-          <div class="about__tags">
-            <span>Peinture numérique</span>
-            <span>Portraits</span>
-            <span>Paysages</span>
-            <span>Fan-arts</span>
-            <span>Commissions</span>
-          </div>
-          <p class="about__tool">
-            <span class="about__tool-label">Atelier</span>
-            <span class="about__tool-value">PaintTool SAI v2 · Tablette Wacom Intuos pro M</span>
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="contact" id="contact">
-      <div class="contact__inner">
-        <p class="eyebrow">Contact</p>
-        <h2 class="h-title">
-          Un projet ?
-          <br />
-          <em>Écrivons-nous.</em>
-        </h2>
-        <p class="contact__desc">
-          Pour toute commande veillez à remplir le formulaire ci dessous ou écrivez directement à
-          <br>
-          <a href="mailto:DouDreamCreation@outlook.fr" class="contact__email-link">DouDreamCreation@outlook.fr</a>.
-        </p>
-
-        <form class="contact__form" id="contact-form" action="https://formsubmit.co/ajax/DouDreamCreation@outlook.fr" method="POST">
-          <!-- Formsubmit anti-spam honeypot -->
-          <input type="text" name="_honey" style="display:none" />
-          <!-- Désactive la page captcha de Formsubmit -->
-          <input type="hidden" name="_captcha" value="false" />
-          <!-- Sujet du mail reçu -->
-          <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio DouDream" />
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">Votre nom</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                placeholder="Prénom Nom"
-              />
-            </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                placeholder="vous@email.fr"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="subject">Type de projet</label>
-            <select id="subject" name="subject">
-              <option>Commande de portrait</option>
-              <option>Illustration sur mesure</option>
-              <option>Collaboration</option>
-              <option>Achat d'œuvre</option>
-              <option>Autre</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              rows="5"
-              required
-              placeholder="Décrivez votre projet…"
-            ></textarea>
-          </div>
-          <button type="submit" class="hero__cta">Envoyer le message</button>
-          <p class="form__privacy">
-            Les informations saisies sont utilisées uniquement pour vous répondre
-            et ne sont ni partagées, ni conservées au-delà de l'échange.
-            <a href="privacy.html">En savoir plus</a>.
-          </p>
-        </form>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer__inner">
-        <p class="footer__brand"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</p>
-        <a href="https://www.instagram.com/doudreamcreation/" target="_blank" rel="noopener" class="footer__ig">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad-footer)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="#" class="nav__logo"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</a>
+    <ul class="nav__links">
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li>
+        <a href="https://www.instagram.com/doudreamcreation/" target="_blank" rel="noopener" class="nav__ig" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad-nav)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <defs>
-              <linearGradient id="ig-grad-footer" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+              <linearGradient id="ig-grad-nav" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
                 <stop offset="0" stop-color="#f09433" />
                 <stop offset="0.25" stop-color="#e6683c" />
                 <stop offset="0.5" stop-color="#dc2743" />
@@ -281,33 +50,226 @@
             </defs>
             <rect x="3" y="3" width="18" height="18" rx="5" />
             <circle cx="12" cy="12" r="4" />
-            <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad-footer)" stroke="none" />
+            <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad-nav)" stroke="none" />
           </svg>
-          <span>@doudreamcreation</span>
         </a>
-        <p class="footer__copy">© 2026 DouDream — Tous droits réservés</p>
-        <p class="footer__note">
-          Reproductions, utilisations commerciales ou redistribution interdites sans
-          autorisation écrite de l'artiste.
-        </p>
-      </div>
-    </footer>
+      </li>
+    </ul>
+    <button class="nav__burger" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
 
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox">
-      <button class="lightbox__close" aria-label="Fermer">×</button>
-      <button class="lightbox__prev" aria-label="Précédent">‹</button>
-      <button class="lightbox__next" aria-label="Suivant">›</button>
-      <figure class="lightbox__figure">
-        <img id="lightbox-img" src="" alt="" />
-        <figcaption>
-          <strong id="lightbox-title"></strong>
-          <span id="lightbox-cat"></span>
-        </figcaption>
-      </figure>
+  <!-- HERO -->
+  <header class="hero">
+    <div id="hero-glow" aria-hidden="true"></div>
+    <div class="hero__content">
+      <img src="assets/images/avatar.webp" alt="DouDream" class="hero__avatar" width="120" height="120" fetchpriority="high" />
+      <p class="hero__eyebrow">Artiste peintre numérique</p>
+      <h1 class="hero__title" aria-label="DouDream"><!-- prettier-ignore --><em>D</em>ou<em>D</em>ream</h1>
+      <p class="hero__tagline">
+        Portraits, paysages, créations originales.<br />
+        Chaque oeuvre est un monde sur mesure.
+      </p>
+      <div class="hero__stats">
+        <div>
+          <strong data-count="129" id="stat-total">0</strong>
+          <span>œuvres</span>
+        </div>
+        <div>
+          <strong data-count="5">0</strong>
+          <span>univers</span>
+        </div>
+        <div>
+          <strong data-count="2018">0 →</strong>
+          <span>en cours</span>
+        </div>
+      </div>
+      <a href="#portfolio" class="hero__cta">
+        Découvrir le portfolio
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="portfolio__header">
+      <p class="eyebrow reveal">Le portfolio</p>
+      <h2 class="h-title reveal reveal--delay-1">
+        Une <em>Histoire</em>,<br />
+        Un coup de <em>pinceau</em>.
+      </h2>
     </div>
 
-    <script type="application/json" id="projects-data">
+    <div class="filters reveal reveal--delay-2" id="filters">
+      <button class="filter filter--active" data-cat="all">Tout <span id="count-all"></span></button>
+      <button class="filter" data-cat="Portraits">Portraits <span id="count-Portraits"></span></button>
+      <button class="filter" data-cat="Paysages">Paysages <span id="count-Paysages"></span></button>
+      <button class="filter" data-cat="CreationPaysages">Créations paysages <span id="count-CreationPaysages"></span></button>
+      <button class="filter" data-cat="Divers">Créations <span id="count-Divers"></span></button>
+    </div>
+
+    <div class="grid" id="grid">
+      <!-- injected by JS -->
+    </div>
+  </section>
+
+  <!-- À PROPOS -->
+  <section class="about" id="apropos">
+    <div class="about__inner">
+      <div class="about__left">
+        <p class="eyebrow reveal reveal--from-left">À propos</p>
+        <h2 class="h-title reveal reveal--from-left reveal--delay-1">
+          Une passion,<br /><em>Des créations</em>.
+        </h2>
+      </div>
+      <div class="about__right">
+        <p class="reveal reveal--delay-1">
+          Je peins en numérique depuis 2019. Portraits, paysages, fan-arts,
+          en reproduction ou en imaginaire. Chaque œuvre est une exploration,
+          une atmosphère, un moment suspendu.
+        </p>
+        <p class="reveal reveal--delay-2">
+          Mon travail s'articule autour de la lumière, du détail,
+          et de l'émotion qu'une illustration peut apporter.
+          Je peins ce que je ressens autant que ce que je vois.
+        </p>
+        <p class="reveal reveal--delay-3">
+          Ce que vous voyez ici n'est pas à vendre,
+          cela vous donne une idée concrète de ce que je peux vous offrir.
+          Avec une personnalisation à volonté.
+        </p>
+        <p class="reveal reveal--delay-4">
+          N'hésitez pas à me contacter via le formulaire ci-dessous
+          pour toute commande ou collaborations.
+        </p>
+        <div class="about__tags reveal reveal--delay-4" id="about-tags">
+          <span>Peinture numérique</span>
+          <span>Portraits</span>
+          <span>Paysages</span>
+          <span>Fan-arts</span>
+          <span>Commissions</span>
+        </div>
+        <p class="about__tool reveal reveal--delay-4">
+          <span class="about__tool-label">Atelier</span>
+          <span class="about__tool-value">PaintTool SAI v2 · Tablette Wacom Intuos pro M</span>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      <p class="eyebrow reveal">Contact</p>
+      <h2 class="h-title reveal reveal--delay-1">
+        Un projet ?<br /><em>Écrivons-nous.</em>
+      </h2>
+      <p class="contact__desc reveal reveal--delay-2">
+        Pour toute commande veillez à remplir le formulaire ci dessous ou écrivez directement à<br />
+        <a href="mailto:DouDreamCreation@outlook.fr" class="contact__email-link">DouDreamCreation@outlook.fr</a>.
+      </p>
+
+      <form class="contact__form reveal reveal--delay-3" id="contact-form"
+            action="https://formsubmit.co/ajax/DouDreamCreation@outlook.fr" method="POST">
+        <input type="text"   name="_honey"    style="display:none" />
+        <input type="hidden" name="_captcha"  value="false" />
+        <input type="hidden" name="_subject"  value="Nouveau message depuis le portfolio DouDream" />
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Votre nom</label>
+            <input type="text"  id="name"  name="name"  required placeholder="Prénom Nom" />
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="vous@email.fr" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="subject">Type de projet</label>
+          <select id="subject" name="subject">
+            <option>Commande de portrait</option>
+            <option>Illustration sur mesure</option>
+            <option>Collaboration</option>
+            <option>Achat d'œuvre</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre projet…"></textarea>
+        </div>
+        <button type="submit" class="hero__cta">Envoyer le message</button>
+        <p class="form__privacy">
+          Les informations saisies sont utilisées uniquement pour vous répondre
+          et ne sont ni partagées, ni conservées au-delà de l'échange.
+          <a href="privacy.html">En savoir plus</a>.
+        </p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer__inner">
+      <p class="footer__brand"><em>D</em>ou<em>D</em>ream</p>
+      <a href="https://www.instagram.com/doudreamcreation/" target="_blank" rel="noopener" class="footer__ig">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="url(#ig-grad-footer)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <defs>
+            <linearGradient id="ig-grad-footer" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#f09433" />
+              <stop offset="0.25" stop-color="#e6683c" />
+              <stop offset="0.5" stop-color="#dc2743" />
+              <stop offset="0.75" stop-color="#cc2366" />
+              <stop offset="1" stop-color="#bc1888" />
+            </linearGradient>
+          </defs>
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="url(#ig-grad-footer)" stroke="none" />
+        </svg>
+        <span>@doudreamcreation</span>
+      </a>
+      <p class="footer__copy">© 2026 DouDream — Tous droits réservés</p>
+      <p class="footer__note">
+        Reproductions, utilisations commerciales ou redistribution interdites
+        sans autorisation écrite de l'artiste.
+      </p>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <button class="lightbox__close" aria-label="Fermer">×</button>
+    <button class="lightbox__prev"  aria-label="Précédent">‹</button>
+    <button class="lightbox__next"  aria-label="Suivant">›</button>
+    <figure class="lightbox__figure">
+      <img id="lightbox-img" alt="" />
+      <figcaption>
+        <strong id="lightbox-title"></strong>
+        <span id="lightbox-cat"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script>
+    // Tags stagger on reveal
+    const tagsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('tags--visible');
+          tagsObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    const tagsEl = document.getElementById('about-tags');
+    if (tagsEl) tagsObserver.observe(tagsEl);
+  </script>
+  <script type="application/json" id="projects-data">
 [
   {
     "id": 99999009,
@@ -1358,7 +1320,7 @@
     "h": 1133
   }
 ]
-    </script>
-    <script src="script.js" defer></script>
-  </body>
+</script>
+  <script src="script.js" defer></script>
+</body>
 </html>
