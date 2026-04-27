@@ -271,7 +271,7 @@ function buildGrid(cat) {
   currentList.forEach((p, i) => {
     const art = document.createElement('div');
     const size = p.size || 'normal';
-    art.className = `art art--${size}`;
+    art.className = `art art--${size}${p.bg === 'light' ? ' art--light' : ''}`;
     art.dataset.idx = i;
     art.style.setProperty('--delay', `${(i % 12) * 40}ms`);
 
@@ -398,6 +398,7 @@ function openLightbox(i, originEl) {
 
   lbImg.src    = 'assets/images/' + p.file;
   lbImg.alt    = p.title || '';
+  lbImg.classList.toggle('lightbox__img--light', p.bg === 'light');
   lbTitle.textContent = p.title || 'Sans titre';
   lbCat.textContent   = prettyCat(p.category);
 
