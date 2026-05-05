@@ -510,6 +510,9 @@ body {
 .footer__brand em { font-style: normal; color: var(--accent); font-weight: 400; }
 .footer__copy { font-size: 0.88rem; color: var(--ink-2); margin-bottom: 0.75rem; }
 .footer__note { font-size: 0.78rem; color: var(--muted); max-width: 520px; margin: 0 auto; line-height: 1.55; }
+.footer__made { font-size: 0.75rem; color: var(--muted); margin-top: 1.5rem; letter-spacing: 0.02em; }
+.footer__made a { color: var(--ink-2); text-decoration: none; border-bottom: 1px solid rgba(229,184,122,0.25); transition: color var(--t), border-color var(--t); }
+.footer__made a:hover { color: var(--accent); border-color: var(--accent); }
 
 .footer__ig {
   display: inline-flex; align-items: center; gap: 0.55rem;
